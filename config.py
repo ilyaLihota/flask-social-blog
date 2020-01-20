@@ -5,15 +5,18 @@ import os
 # social_blog/
 #     social_blog/          # app/
 #         __init__.py
-#         templates/
-#         static/
-#         main/             # blueprint
-#             __init__.py
-#             errors.py
-#             forms.py
-#             views.py      # the routes of the application 'social_blog'
 #         email.py
 #         models.py
+#         templates/
+#         static/
+#         auth/             # |
+#             __init__.py   # blueprint 'auth'
+
+#         main/             # |
+#             __init__.py   # |
+#             errors.py     # blueprint 'main'
+#             forms.py      # |
+#             views.py      # | the routes of the application 'social_blog'
 #     migrations/
 #     tests/
 #         __init__.py
@@ -32,7 +35,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or '7b7adf836fc3cbe73d34719e880abc7f'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
+    FLASKY_MAIL_SENDER = 'Flasky Admin <{}>'.format(os.environ.get('FLASKY_MAIL_SENDER'))
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
 
     @staticmethod
