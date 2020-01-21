@@ -36,3 +36,32 @@ class RegistrationForm(Form):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
+
+
+class ChangePasswordForm(Form):
+    old_password = PasswordField('Old password', validators=[Required()])
+    password = PasswordField('New password', validators=[Required(),
+                                                         EqualTo('password2', message='Passwords must be match.')])
+    password2 = PasswordField('Confirm password', validators=[Required()])
+    submit = SubmitField('Change')
+
+
+class ResetPasswordRequestForm(Form):
+    email = StringField('Email', validators=[Required(),
+                                             Length(1, 64),
+                                             Email()])
+    submit = SubmitField('Reset')
+
+
+class ResetPasswordForm(Form):
+    password = PasswordField('New password', validators=[Required(),
+                                                          EqualTo('password2', message='Password must match.')])
+    password2 = PasswordField('Confirm password', validators=[Required()])
+    submit = SubmitField('Change')
+
+
+class ChangeEmailForm(Form):
+    new_email = StringField('Email', validators=[Required(),
+                                                 Length(1, 64),
+                                                 Email()])
+    submit = SubmitField('Change')

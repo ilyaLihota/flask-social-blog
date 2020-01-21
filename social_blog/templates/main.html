@@ -80,6 +80,7 @@
 
         <ul class="nav navbar-nav navbar-right ml-4 mr-3">
           {% if current_user.is_authenticated %}
+            <li class="mr-3">{{ current_user.username }}</li>
             <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
           {% else %}
             <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
