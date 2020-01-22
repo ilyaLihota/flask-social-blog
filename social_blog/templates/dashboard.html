@@ -3,12 +3,21 @@
 {% block title %}Flasky - Dashboard{% endblock %}
 
 {% block content %}
-    <h1>
-        Hello,
-        {% if current_user.is_authenticated %}
-            {{ current_user.username }}
-        {% else %}
-            Stranger
-        {% endif %}
-    </h1>
+<h1>
+    Hello,
+    {% if current_user.is_authenticated %}
+        {{ current_user.username }}
+    {% else %}
+        Stranger
+    {% endif %}
+</h1>
+<div>
+    <a href="{{ url_for('auth.change_email_request') }}">Change Email</a>
+</div>
+<div>
+    <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+</div>
+<div>
+    <a href="{{ url_for('main.edit_profile') }}">Edit profile</a>
+</div>
 {% endblock %}
